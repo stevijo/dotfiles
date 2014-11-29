@@ -1,0 +1,115 @@
+set nocompatible
+set t_Co=256
+
+colorscheme xoria256
+set guifont=menlo\ for\ powerline:h16
+set guioptions-=T
+set guioptions-=r
+set go-=L
+set linespace=15
+
+set showmode
+set nowrap
+set tabstop=4
+set smarttab
+set tags=tags
+set softtabstop=4
+set expandtab
+set shiftwidth=4
+set shiftround
+set backspace=indent,eol,start
+set autoindent
+set copyindent
+set number
+set ignorecase
+set smartcase
+set timeout timeoutlen=200 ttimeoutlen=100
+set visualbell
+set noerrorbells
+set autowrite
+set mouse=a
+
+let mapleader = ","
+let g:mapleader= ","
+
+map <Leader>t :!phpunit %<cr>
+
+nmap <leader>w :w!<cr>
+
+nnoremap j gj
+nnoremap k gk
+
+imap jj <esc>
+
+nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
+
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
+
+nmap <C-v> :vertical resize +5<cr>
+
+nmap <C-b> :NERDTreeToggle<cr>
+
+set showcmd
+
+nmap :sp :rightbelow sp<cr>
+
+nmap :bp :BufSurcBack<cr>
+nmap :bn :BufSrufForward<cr>
+
+highlight Search cterm=underline
+
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+
+let g:Powerline_symbols = 'fancy'
+set laststatus=2
+set encoding=utf-8
+set noshowmode
+
+autocmd cursorhold * set nohlsearch
+autocmd cursormoved * set hlsearch
+
+command! H let @/=""
+
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+autocmd BufWritePre *.php :%s/\s\+$//e
+
+nmap ,t :e todo.txt<cr>
+
+nmap <leader>lr :e app/routes.php<cr>
+nmap <leader>lca :e app/config/app.php<cr>81Gf(%0
+nmap <leader>lcd :e app/config/database.php<cr>
+nmap <leader>lc :e composer.json<cr>
+
+map <D-p> :CtrlP<cr>
+map <C-r> :CtrlPBufTag<cr>
+
+set wildignore+=*/vendor/**
+set wildignore+=*/public/forum/**
+
+" create/edit file in the current directory
+nmap :ed :edit %:p:h/
+
+
+" Prepare a new PHP class
+function! Class()
+let name = input('Class name? ')
+let namespace = input('Any Namespace? ')
+
+if strlen(namespace)
+    exec "normal i<?php namespace " . namespace . ";\<C-m>\<C-m>"
+else
+    exec "normal i<?php \<C-m>"
+endif
+
+" Open class
+exec "normal iclass " . name . " {\<C-m>}\<C-[>O\<C-[>"
+
+exec "normal i\<C-M>public function __construct()\<C-M>{\<C-M>\<C-M>}\<C-[>"
+endfunction
+nmap ,1 :call Class()
