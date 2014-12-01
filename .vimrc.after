@@ -29,9 +29,6 @@ set noerrorbells
 set autowrite
 set mouse=a
 
-let mapleader = ","
-let g:mapleader= ","
-
 map <Leader>t :!phpunit %<cr>
 
 nmap <leader>w :w!<cr>
@@ -43,11 +40,17 @@ imap jj <esc>
 
 nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 
+nmap Ü {
+nmap * }
+nmap ü [
+nmap + ]
 nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
-
+nmap 25 :vertical resize 40<cr>
+nmap 50 <c-w>=
+nmap 75 :vertical resize 120<cr>
 nmap <C-v> :vertical resize +5<cr>
 
 nmap <C-b> :NERDTreeToggle<cr>
@@ -61,8 +64,8 @@ nmap :bn :BufSrufForward<cr>
 
 highlight Search cterm=underline
 
-set backupdir=~/.vim/backup//
-set directory=~/.vim/swap//
+set backupdir=~/.vim/backup/
+set directory=~/.vim/swap/
 
 let g:Powerline_symbols = 'fancy'
 set laststatus=2
@@ -85,9 +88,13 @@ nmap <leader>lr :e app/routes.php<cr>
 nmap <leader>lca :e app/config/app.php<cr>81Gf(%0
 nmap <leader>lcd :e app/config/database.php<cr>
 nmap <leader>lc :e composer.json<cr>
-
-map <D-p> :CtrlP<cr>
-map <C-r> :CtrlPBufTag<cr>
+nmap <leader>gb :Gblame<CR>
+nmap <leader>gs :Gstatus<CR>
+nmap <leader>gd :Gdiff<CR>
+nmap <leader>gl :Glog<CR>
+nmap <leader>gc :Gcommit<CR>
+nmap <leader>gp :Git push<CR>
+nmap <leader><leader> <C-^>
 
 set wildignore+=*/vendor/**
 set wildignore+=*/public/forum/**
