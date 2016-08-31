@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/home/stevijo/.config/nvim/bundle'
+let g:netrw_dirhist_2='/home/stevijo/.vim/bundle'
+let g:netrw_dirhist_3='/home/stevijo/.vim'
+let g:netrw_dirhist_4='/home/stevijo/.vim/bundle'
+let g:netrw_dirhist_5='/home/stevijo/.vim'
