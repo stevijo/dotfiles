@@ -102,7 +102,7 @@ bindsym $mod+a focus parent
 set $workspace1 "1 "
 set $2raw 2 
 set $workspace2 "2 " 
-set $workspace3 "3 "
+set $workspace3 "3 "
 set $workspace4 "4 "
 set $workspace5 "5 "
 set $workspace6 "6 "
@@ -209,6 +209,7 @@ bindsym Print exec --no-startup-id scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/Bilder
 
 for_window [class="Spotify"] move to workspace $workspace10
 assign [class="google-chrome"] $workspace1
+assign [class="chromium"] $workspace1
 assign [class="jetbrains-phpstorm"] $workspace3
 
 for_window [class="^Vlc$" instance="vlc"] floating enable
@@ -232,7 +233,8 @@ exec --no-startup-id "i3-msg 'workspace $2raw; exec i3-sensible-terminal'"
 exec --no-startup-id "i3-msg 'workspace $2raw; exec i3-sensible-terminal'"
 exec --no-startup-id nm-applet
 exec --no-startup-id dropbox
-exec --no-startup-id google-chrome-stable
+exec --no-startup-id gnome-encfs-manager
+exec --no-startup-id chromium
 exec --no-startup-id compton --backend glx --paint-on-overlay --vsync opengl-swc -f
 exec --no-startup-id spotify
 
