@@ -13,17 +13,17 @@ set $inactive-bg-color   #2f343f
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
+set $gnomeschema org.gnome.desktop.interface
 
 set $mod Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Cantarell Regular 13
+font pango:Cantarell Regular  13
 focus_follows_mouse no
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -36,19 +36,13 @@ focus_follows_mouse no
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
+bindsym $mod+Return exec --no-startup-id termite
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-# bindsym $mod+d exec --no-startup-id "i3-dmenu-desktop --dmenu='rofi -dmenu -lines 3 -show run -eh 2 -fullscreen -padding 400 -opacity \\"85\\" -bw 0 -color-window \\"$bg-color $bg-color $text-color #9575cd\\" -font \\"Liberation Mono Regular 18\\"'" 
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-
+bindsym $mod+d exec --no-startup-id termite --name=launcher -e "bash -c '~/.config/sway/scripts/search-desktop'"
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -101,16 +95,19 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 set $workspace1 "1 "
+set $1raw 1 
 set $2raw 2 
 set $workspace2 "2 " 
 set $workspace3 "3 "
-set $workspace4 "4 "
+set $workspace4 "4 "
+set $4raw 4 
 set $workspace5 "5 "
 set $workspace6 "6 "
 set $workspace7 "7 "
 set $workspace8 "8 "
 set $workspace9 "9 "
 set $workspace10 "10 "
+set $10raw 10 
 
 bindsym $mod+Shift+1 move container to workspace $workspace1
 bindsym $mod+Shift+2 move container to workspace $workspace2
@@ -143,7 +140,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Sway session.' -b 'Yes, exit sway' 'swaymsg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -174,30 +171,31 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-  	status_command i3blocks -c ~/.config/i3/i3blocks.conf
-	colors {
-		background $bg-color
+  	status_command i3blocks -c ~/.config/sway/i3blocks.conf
+    font pango: Cantarell Regular, FontAwesome 13
+	  colors {
+		    background $bg-color
 	    	separator #757575
 		#                  border             background         text
-		focused_workspace  $bg-color          $bg-color          $text-color
-		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-	}
+		    focused_workspace  $bg-color          $bg-color          $text-color
+		    inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+		    urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+	  }
 }
 
 
 # window colors
 # #                       border              background         text                 indicator
-client.focused          $bg-color           $bg-color          $text-color          #00ff00
-client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
-client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
-client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color        #00ff00
+client.focused          $bg-color           $bg-color          $text-color          #00ff00 $bg-color
+client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00 $bg-color
+client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00 $bg-color
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color        #00ff00 $bg-color
 
-bindsym $mod+Shift+x exec --no-startup-id i3lock-fancy 
+bindsym $mod+Shift+x exec --no-startup-id ~/.config/sway/scripts/lock-screen 
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5%
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 1 toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioPause exec --no-startup-id playerctl play-pause
@@ -206,39 +204,34 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10 # increase screen brightness
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10 # decrease screen brightness
-bindsym Print exec --no-startup-id scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/Bilder/'
+bindsym Print exec --no-startup-id grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png') 
 
-for_window [class="Spotify"] move to workspace $workspace10
-assign [class="google-chrome"] $workspace1
-assign [class="Chromium"] $workspace1
-assign [class="chromium"] $workspace1
-assign [class="jetbrains-phpstorm"] $workspace3
-assign [class="jetbrains-clion"] $workspace3
+assign [class="Spotify"] $10raw
+assign [class="Google-chrome"] $1raw
+for_window [app_id="launcher"] floating enable, border none
+for_window [app_id="gnome-control-center"] floating enable
+for_window [class="vlc"] floating enable
 
-for_window [class="^Vlc$" instance="vlc"] floating enable
-for_window [class="^Steam$" title="^Freunde$"] floating enable
-for_window [class="^Steam$" title="Steam - Neuigkeiten"] floating enable
-for_window [class="^Steam$" title=".* - Chat"] floating enable
-for_window [class="^Steam$" title="^Einstellungen$"] floating enable
-for_window [class="^Steam$" title=".* - event started"] floating enable
-for_window [class="^Steam$" title=".* CD key"] floating enable
-for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
-for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
-for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
-for_window [title="^Steam Keyboard$"] floating enable
-for_window [class="^Pavucontrol$"] floating enable
+output "*" background ~/Bilder/Android-L-Material-Design-Wallpapers-5.png fill
 
-exec_always --no-startup-id "setxkbmap de"
-exec_always --no-startup-id feh --bg-scale "/home/stevijo/Bilder/Material_Design_Wallpaper_WALLPAPERDNA (8).png"
-exec --no-startup-id "i3-msg 'workspace $2raw; append_layout ~/.config/i3/workspace2.json'"
-exec --no-startup-id "i3-msg 'workspace $2raw; exec i3-sensible-terminal'"
-exec --no-startup-id "i3-msg 'workspace $2raw; exec i3-sensible-terminal'"
-exec --no-startup-id "i3-msg 'workspace $2raw; exec i3-sensible-terminal'"
+input 1739:30381:DLL0665:01_06CB:76AD_Touchpad {
+  tap enabled
+}
+
+input 1:1:AT_Translated_Set_2_keyboard {
+  xkb_layout de
+}
+
+exec_always --no-startup-id gsettings set $gnomeschema gtk-theme 'Clearlooks'
+exec_always --no-startup-id gsettings set $gnomeschema icon-theme 'flat-remix'
+exec_always --no-startup-id gsettings set $gnomeschema cursor-theme 'oxy-white'
+
+exec --no-startup-id 'mako --default-timeout 2000 &>/dev/null &'
+exec --no-startup-id '/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &>/dev/null &'
+exec --no-startup-id 'gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg'
+exec --no-startup-id /opt/Enpass/bin/runenpass.sh stevijo
 exec --no-startup-id nm-applet
-exec --no-startup-id dropbox
-exec --no-startup-id gnome-encfs-manager
-exec --no-startup-id chromium
-exec --no-startup-id compton --backend glx --paint-on-overlay --vsync opengl-swc -f
+exec --no-startup-id google-chrome-stable 
 exec --no-startup-id spotify
-
+exec --no-startup-id "swaymsg 'debuglog on; shmlog on; reload'"
 
