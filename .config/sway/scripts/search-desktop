@@ -1,3 +1,3 @@
 #!/bin/bash
-line=`ag --nobreak --nonumbers --noheading --nocolor "\[Desktop Entry\][^\[]+Name=.+" /usr/share/applications | grep "Name=" | sed -En "s/Name=//p" | /home/linuxbrew/.linuxbrew/bin/fzf --delimiter=":" --with-nth=2 --print-query`; if [ $(echo "$line" | wc -l) -eq 2 ]; then echo "$line" | sed -n 2p | cut -d":" -f1 | xargs basename -s .desktop -a | xargs -r swaymsg -t command exec gtk-launch; else echo -n "$line" | xargs -r swaymsg -t command exec; fi
+line=`ag --nobreak --nonumbers --noheading --nocolor "\[Desktop Entry\][^\[]+Name=.+" /usr/share/applications | grep "Name=" | sed -En "s/Name=//p" | /home/linuxbrew/.linuxbrew/bin/fzf --delimiter=":" --with-nth=2 --print-query`; if [ $(echo "$line" | wc -l) -eq 2 ]; then echo "$line" | sed -n 2p | cut -d":" -f1 | xargs -r swaymsg -t command exec XDG_CURRENT_DESKTOP=GNOME dex; exit 0; fi; echo -n "$line" | xargs -r swaymsg -t command exec XDG_CURRENT_DESKTOP=GNOME 
 
