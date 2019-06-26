@@ -99,6 +99,7 @@ set $1raw 1 
 set $2raw 2 
 set $workspace2 "2 " 
 set $workspace3 "3 "
+set $3raw 3 
 set $workspace4 "4 "
 set $4raw 4 
 set $workspace5 "5 "
@@ -212,9 +213,9 @@ for_window [app_id="launcher"] floating enable, border none
 for_window [app_id="gnome-control-center"] floating enable
 for_window [class="vlc"] floating enable
 
-output "*" background ~/Bilder/Android-L-Material-Design-Wallpapers-5.png fill
+output "*" bg /usr/share/backgrounds/warty-final-ubuntu.png fill
 
-input 1739:30381:DLL0665:01_06CB:76AD_Touchpad {
+input 2:8:AlpsPS/2_ALPS_DualPoint_TouchPad {
   tap enabled
 }
 
@@ -222,16 +223,23 @@ input 1:1:AT_Translated_Set_2_keyboard {
   xkb_layout de
 }
 
-exec_always --no-startup-id gsettings set $gnomeschema gtk-theme 'Clearlooks'
-exec_always --no-startup-id gsettings set $gnomeschema icon-theme 'flat-remix'
-exec_always --no-startup-id gsettings set $gnomeschema cursor-theme 'oxy-white'
+input 1130:35:HID_046a:0023 {
+  xkb_layout de
+}
 
+workspace $1raw output HDMI-A-2
+workspace $3raw output HDMI-A-1
+workspace $2raw output eDP-1
+
+exec_always --no-startup-id gsettings set $gnomeschema icon-theme 'Flat-Remix'
+
+exec --no-startup-id 'xrdb -load ~/.Xresources'
+exec --no-startup-id 'redshift -m wayland -O 4000'
 exec --no-startup-id 'mako --default-timeout 2000 &>/dev/null &'
 exec --no-startup-id '/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &>/dev/null &'
-exec --no-startup-id 'gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg'
-exec --no-startup-id /opt/Enpass/bin/runenpass.sh stevijo
+#exec --no-startup-id /opt/Enpass/bin/runenpass.sh stevijo
 exec --no-startup-id nm-applet
 exec --no-startup-id google-chrome-stable 
-exec --no-startup-id spotify
+#exec --no-startup-id spotify
 exec --no-startup-id "swaymsg 'debuglog on; shmlog on; reload'"
 

@@ -1,13 +1,24 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python3
+import subprocess
+import tempfile
+import os
+import sys
+import i3ipc.i3ipc
+i3 = i3ipc.Connection()
+outputs = [x['name'] for x in i3.get_outputs()]
+images = [tempfile.mktemp() for _ in outputs]
+lockcmd = ["swaylock"]
 
-# handle being called from systemd service
-if [ -z "$XDG_RUNTIME_DIR" ] && [ -z "$SWAYSOCK"]; then
-	uid=$(id -u $USER)
-	export XDG_RUNTIME_DIR="/run/user/"$uid"/"
-	export SWAYSOCK=$(find $XDG_RUNTIME_DIR -maxdepth 1 -iname 'sway*sock')
-fi
+# take the screenshots
+for output,image in zip(outputs, images):
+    subprocess.call(["grim", "-o", output, image])
+    subprocess.call(["convert", image, "-blur", "0x6", image])
+    lockcmd.extend(["-i", output+":"+image])
 
-grim /home/$USER/Bilder/lockscreen.png
-convert -blur 0x6 /home/$USER/Bilder/lockscreen.png /home/$USER/Bilder/lockscreen.png
+# lock the screen
+lockcmd.extend(sys.argv[1:])
+subprocess.call(lockcmd)
 
-swaylock -i /home/$USER/Bilder/lockscreen.png
+# cleanup
+for img in images:
+    os.remove(img)
