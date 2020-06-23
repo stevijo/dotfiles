@@ -8,22 +8,21 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-export TERM=xterm-256color
-export _JAVA_AWT_WM_NONREPARENTING=1
+# if running bash
+#if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    #if [ -f "$HOME/.bashrc" ]; then
+	#. "$HOME/.bashrc"
+    #fi
+#fi
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
-
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-PATH="$HOME/go/bin:$PATH"
-
-export CLUTTER_BACKEND=x11                                                     
-export XDG_CURRENT_DESKTOP="GNOME"                                             
-export XDG_SESSION_TYPE="wayland dbus-run-session gnome-session"               
+# set PATH so it includes user's private bin directories
+PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"
+export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
+export CLUTTER_BACKEND=x11
+export XDG_CURRENT_DESKTOP="GNOME"
+export XDG_SESSION_TYPE="wayland dbus-run-session gnome-session"
 export GDK_BACKEND=x11
+export _JAVA_AWT_WM_NONREPARENTING=1
