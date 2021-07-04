@@ -36,13 +36,13 @@ focus_follows_mouse no
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id termite
+bindsym $mod+Return exec --no-startup-id alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id termite --name=launcher -e "bash -c '~/.config/sway/scripts/search-desktop'"
+bindsym $mod+d exec --no-startup-id alacritty --title launcher -e bash -c '~/.config/sway/scripts/search-desktop'
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -209,7 +209,7 @@ bindsym Print exec --no-startup-id grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-
 assign [class="Spotify"] $10raw
 assign [class="Google-chrome"] $1raw
 for_window [title="^Enpass Assistant*$"] floating enable, focus
-for_window [app_id="launcher"] floating enable, border none
+for_window [title="launcher"] floating enable, border none
 for_window [app_id="gnome-control-center"] floating enable
 for_window [class="vlc"] floating enable
 

@@ -26,3 +26,4 @@ export XDG_CURRENT_DESKTOP="GNOME"
 export XDG_SESSION_TYPE="wayland dbus-run-session gnome-session"
 export GDK_BACKEND=x11
 export _JAVA_AWT_WM_NONREPARENTING=1
+. "$HOME/.cargo/env"

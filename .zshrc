@@ -37,7 +37,8 @@ export EDITOR=vim
 export PATH=$PATH:/home/stevijo/.gem/ruby/2.1.0/bin:/home/stevijo/.config/composer/vendor/bin:/opt/android/tools:/opt/android/platform-tools
 export VAGRANT_DEFAULT_PROVIDER=docker
 export GOPATH=~/.gocode
-export PATH=$PATH:$GOPATH/bin:/usr/lib/go-1.8/bin
+export GOROOT=/home/stevijo/Dev/go 
+export PATH=$PATH:$GOPATH/bin:/home/stevijo/Dev/go/bin
 
 antigen theme agnoster
 antigen apply
