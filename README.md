@@ -6,8 +6,10 @@ Following Packages are needed:
   * dein.vim
 * Zsh
   * antigen
-* i3wm 
+  * fzf
+  * base16-shell
+* sway 
   * i3blocks
-  * rofi
+* alacritty
 * Font Awesome
 * Some Powerline Font like in Nerd Fonts
