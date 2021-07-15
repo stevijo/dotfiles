@@ -21,9 +21,7 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
-export CLUTTER_BACKEND=x11
-export XDG_CURRENT_DESKTOP="GNOME"
-export XDG_SESSION_TYPE="wayland dbus-run-session gnome-session"
-export GDK_BACKEND=x11
+export XDG_CURRENT_DESKTOP="sway"
+export XDG_SESSION_TYPE="wayland dbus-run-session"
 export _JAVA_AWT_WM_NONREPARENTING=1
 . "$HOME/.cargo/env"

@@ -1,9 +1,10 @@
 # Lines configured by zsh-newuser-install
-export XDG_CURRENT_DESKTOP="GNOME"
+export XDG_CURRENT_DESKTOP="sway"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
 
 if [ -z "$DISPLAY" ] && [ "$(fgconsole)" -eq 1 ]; then
-  exec dbus-launch --sh-syntax --exit-with-session sway > /var/log/sway.log 2>&1
+  exec sway > /var/log/sway.log 2>&1
+  return
 fi
 
 HISTFILE=~/.histfile
@@ -25,17 +26,13 @@ autoload -Uz colors && colors
 autoload -Uz compinit
 compinit
 alias ls='ls --color=auto'
-alias homestead='function __homestead() { (cd ~/Dev/PhpstormProjects/homesteadDocker && vagrant $*); unset -f __homestead; }; __homestead'
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 JAVA_HOME=/usr/lib/jvm/default
-export ANDROID_HOME=/opt/android
 export SHELL=zsh
 export TERM=xterm-256color
 export LD_CONFIG_PATH=$LD_CONFIG_PATH:/usr/local/lib:/usr/lib
 export EDITOR=vim
-export PATH=$PATH:/home/stevijo/.gem/ruby/2.1.0/bin:/home/stevijo/.config/composer/vendor/bin:/opt/android/tools:/opt/android/platform-tools
-export VAGRANT_DEFAULT_PROVIDER=docker
 export GOPATH=~/.gocode
 export GOROOT=/home/stevijo/Dev/go 
 export PATH=$PATH:$GOPATH/bin:/home/stevijo/Dev/go/bin

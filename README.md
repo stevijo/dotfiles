@@ -15,10 +15,16 @@ Following Packages are needed:
   * [dex](https://github.com/jceb/dex)
   * mako
   * grim
-  * redshift (wayland version) [https://github.com/minus7/redshift](https://github.com/minus7/redshift)
+  * gammastep [https://gitlab.com/chinstrap/gammastep](https://gitlab.com/chinstrap/gammastep)
   * [light](https://github.com/haikarainen/light)
   * pulseaudio
   * [playerctl](https://github.com/altdesktop/playerctl)
+  * xdg-desktop-portal
+  * xdg-desktop-portal-wlr
+  * imagick
+  * jq
+  * pipewire
 * alacritty
 * Font Awesome
 * Some Powerline Font like in Nerd Fonts
+* flat-remix icons + oxy-white cursor

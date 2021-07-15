@@ -206,11 +206,10 @@ bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10 # increase screen b
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10 # decrease screen brightness
 bindsym Print exec --no-startup-id grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png') 
 
-assign [class="Spotify"] $10raw
-assign [class="Google-chrome"] $1raw
-for_window [title="^Enpass Assistant*$"] floating enable, focus
+assign [class="Spotify"] $workspace10
+assign [class="Google-chrome"] $workspace1
 for_window [title="launcher"] floating enable, border none
-for_window [app_id="gnome-control-center"] floating enable
+for_window [title="win0"] floating enable, border none
 for_window [class="vlc"] floating enable
 
 output "*" background ~/Bilder/Android-L-Material-Design-Wallpapers-5.png fill
@@ -223,11 +222,20 @@ input 1:1:AT_Translated_Set_2_keyboard {
   xkb_layout de
 }
 
-exec --no-startup-id 'redshift -m wayland -O 4500 &>/dev/null &'
-exec --no-startup-id 'mako --default-timeout 2000 &>/dev/null &'
-exec --no-startup-id '/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &>/dev/null &'
-exec --no-startup-id nm-applet
-exec --no-startup-id google-chrome-stable 
-exec --no-startup-id spotify
-exec --no-startup-id "swaymsg 'debuglog on; shmlog on; reload'"
+set $gnome-schema org.gnome.desktop.interface
+
+exec_always {
+  gsettings set $gnome-schema gtk-theme 'Clearlooks'
+  gsettings set $gnome-schema icon-theme 'flat-remix'
+  gsettings set $gnome-schema cursor-theme 'oxy-white'
+  gsettings set $gnome-schema font-name 'Sans 10'
+}
+
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway 
+exec 'gammastep -O 4500'
+exec 'mako --default-timeout 2000'
+exec '/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1'
+exec nm-applet
+exec google-chrome-stable 
+exec spotify
 

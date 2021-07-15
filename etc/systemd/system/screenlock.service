@@ -1,0 +1,13 @@
+[Unit]
+Description=i3 lock screen
+Before=systemd-suspend.service
+
+[Service]
+User=stevijo
+Type=notify
+NotifyAccess=all
+Environment=WAYLAND_DISPLAY=wayland-1
+ExecStart=/home/stevijo/.config/sway/scripts/lock-screen
+
+[Install]
+WantedBy=sleep.target

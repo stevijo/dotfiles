@@ -7,7 +7,17 @@ if [ -z "$XDG_RUNTIME_DIR" ] && [ -z "$SWAYSOCK"]; then
 	export SWAYSOCK=$(find $XDG_RUNTIME_DIR -maxdepth 1 -iname 'sway*sock')
 fi
 
-grim /home/$USER/Bilder/lockscreen.png
-convert -blur 0x6 /home/$USER/Bilder/lockscreen.png /home/$USER/Bilder/lockscreen.png
+for OUTPUT in `swaymsg -t get_outputs | jq -r '.[] | select(.active == true) | .name'`
+do
+    IMAGE=/tmp/$OUTPUT-lock.png
+    grim -o $OUTPUT $IMAGE
+    convert -blur 0x6 $IMAGE $IMAGE
+    LOCKARGS="${LOCKARGS} --image ${OUTPUT}:${IMAGE}"
+    IMAGES="${IMAGES} ${IMAGE}"
+done
 
-swaylock -i /home/$USER/Bilder/lockscreen.png
+
+systemd-notify --ready
+
+swaylock $LOCKARGS 
+rm $IMAGES
