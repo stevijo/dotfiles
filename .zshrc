@@ -1,12 +1,3 @@
-# Lines configured by zsh-newuser-install
-export XDG_CURRENT_DESKTOP="sway"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
-
-if [ -z "$DISPLAY" ] && [ "$(fgconsole)" -eq 1 ]; then
-  exec sway > /var/log/sway.log 2>&1
-  return
-fi
-
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
@@ -39,8 +30,6 @@ export PATH=$PATH:$GOPATH/bin:/home/stevijo/Dev/go/bin
 
 antigen theme agnoster
 antigen apply
-
-source /home/stevijo/.profile
 
 source /home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.zsh
 source /home/linuxbrew/.linuxbrew/opt/fzf/shell/completion.zsh

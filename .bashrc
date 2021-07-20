@@ -120,5 +120,3 @@ if [ -f /home/stevijo/.tnsrc ]; then
     source /home/stevijo/.tnsrc 
 fi
 ###-tns-completion-end-###
-source /home/stevijo/.profile
-. "$HOME/.cargo/env"
