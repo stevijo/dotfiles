@@ -4,8 +4,8 @@ line=`echo "$desktopEntries" | /home/linuxbrew/.linuxbrew/bin/fzf --delimiter=":
 
 if [ $(echo "$line" | wc -l) -eq 2 ]; then 
 	program=`echo "$line" | sed -n 2p | cut -d":" -f1`
-	swaymsg -t command exec "bash -c 'source ~/.profile && dex $program'"
+	swaymsg -t command exec "dex $program"
 else
-       	program=`echo -n $line`
-	swaymsg -t command exec "bash -c 'source ~/.profile && $program'"
+  program=`echo -n $line`
+	swaymsg -t command exec "$program"
 fi

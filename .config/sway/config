@@ -36,13 +36,13 @@ focus_follows_mouse no
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id alacritty
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id alacritty --title launcher -e bash -c '~/.config/sway/scripts/search-desktop'
+bindsym $mod+d exec alacritty --title launcher -e bash -c '~/.config/sway/scripts/search-desktop'
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -204,8 +204,8 @@ bindsym Print exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focus
 bindsym Shift+Print exec grim -g "$(slurp)" - | wl-copy
 bindsym Ctrl+Print exec swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp | grim -g - - | wl-copy
 
-assign [class="Spotify"] $workspace10
 assign [class="Google-chrome"] $workspace1
+for_window [class="Spotify"] move container to workspace $workspace10
 for_window [title="launcher"] floating enable, border none
 for_window [title="win0"] floating enable, border none
 for_window [class="vlc"] floating enable
@@ -232,7 +232,6 @@ exec_always {
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway 
 exec 'gammastep -O 4500'
 exec 'mako --default-timeout 2000'
-exec '/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1'
 exec nm-applet
 exec google-chrome-stable 
 exec spotify
