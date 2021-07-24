@@ -11,7 +11,7 @@ Following Packages are needed:
 * sway 
   * i3blocks
   * [the_silver_searcher](https://github.com/ggreer/the_silver_searcher)
-  * [linuxbrew](https://github.com/Linuxbrew/brew)
+  * [homebrew](https://github.com/Homebrew/brew)
   * [dex](https://github.com/jceb/dex)
   * [mako](https://github.com/emersion/mako)
   * [grim](https://github.com/emersion/grim)

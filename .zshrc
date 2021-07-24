@@ -19,14 +19,14 @@ compinit
 alias ls='ls --color=auto'
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-JAVA_HOME=/usr/lib/jvm/default
+export JAVA_HOME=/usr/lib/jvm/default
 export SHELL=zsh
 export TERM=xterm-256color
 export LD_CONFIG_PATH=$LD_CONFIG_PATH:/usr/local/lib:/usr/lib
 export EDITOR=vim
 export GOPATH=~/.gocode
 export GOROOT=/home/stevijo/Dev/go 
-export PATH=$PATH:$GOPATH/bin:/home/stevijo/Dev/go/bin
+export PATH=$PATH:$GOPATH/bin
 
 antigen theme agnoster
 antigen apply

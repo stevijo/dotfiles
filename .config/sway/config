@@ -229,7 +229,9 @@ exec_always {
   gsettings set $gnome-schema font-name 'Sans 10'
 }
 
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway 
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_RUNTIME_DIR
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_RUNTIME_DIR
 exec 'gammastep -O 4500'
 exec 'mako --default-timeout 2000'
 exec nm-applet
