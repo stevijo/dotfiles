@@ -1,5 +1,5 @@
 #!/bin/bash
-desktopEntries=`ag --nobreak --nonumbers --noheading --nocolor "\[Desktop Entry\]((?<!^Name=)[\s\S](?!^\[[^\]]+\]$))*\nName=.*" /usr/share/applications/* $HOME/.local/share/applications /var/lib/snapd/desktop/applications | grep ":Name=" | sed -En "s/Name=//p"`
+desktopEntries=`ag --nobreak --nonumbers --noheading --nocolor "\[Desktop Entry\]((?<!^Name=)[\s\S](?!^\[[^\]]+\]$))*\nName=.*" /usr/share/applications/* $HOME/.local/share/applications /var/lib/flatpak/exports/share/applications/* $HOME/.local/share/flatpak/exports/share/applications /var/lib/snapd/desktop/applications /usr/local/share/applications | grep ":Name=" | sed -En "s/Name=//p"`
 line=`echo "$desktopEntries" | /home/linuxbrew/.linuxbrew/bin/fzf --delimiter=":" --with-nth=2 --print-query`
 
 if [ $(echo "$line" | wc -l) -eq 2 ]; then 

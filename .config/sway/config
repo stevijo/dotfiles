@@ -96,9 +96,9 @@ bindsym $mod+a focus parent
 
 set $workspace1 "1 "
 set $workspace2 "2 " 
-set $workspace3 "3 "
-set $workspace4 "4 "
-set $workspace5 "5 "
+set $workspace3 "3 "
+set $workspace4 "4 "
+set $workspace5 "5 "
 set $workspace6 "6 "
 set $workspace7 "7 "
 set $workspace8 "8 "
@@ -209,23 +209,24 @@ for_window [class="Spotify"] move container to workspace $workspace10
 for_window [title="launcher"] floating enable, border none
 for_window [title="win0"] floating enable, border none
 for_window [class="vlc"] floating enable
+for_window [class="Outlook"] floating enable
 
-output "*" background ~/Bilder/Android-L-Material-Design-Wallpapers-5.png fill
+output "*" background /usr/share/backgrounds/warty-final-ubuntu.png fill
 
 input 1739:30381:DLL0665:01_06CB:76AD_Touchpad {
   tap enabled
 }
 
-input 1:1:AT_Translated_Set_2_keyboard {
+input * {
   xkb_layout de
+  tap enabled
 }
 
 set $gnome-schema org.gnome.desktop.interface
 
 exec_always {
-  gsettings set $gnome-schema gtk-theme 'Clearlooks'
-  gsettings set $gnome-schema icon-theme 'flat-remix'
-  gsettings set $gnome-schema cursor-theme 'oxy-white'
+  gsettings set $gnome-schema gtk-theme 'Adwaita'
+  gsettings set $gnome-schema cursor-theme 'DMZ-White'
   gsettings set $gnome-schema font-name 'Sans 10'
 }
 
@@ -234,7 +235,8 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_RUNTIME_DIR
 exec 'gammastep -O 4500'
 exec 'mako --default-timeout 2000'
+exec /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 exec nm-applet
-exec google-chrome-stable 
+exec google-chrome-stable --enable-features=UseOzonePlatform --ozone-platform=wayland
 exec spotify
-
+exec kanshi
